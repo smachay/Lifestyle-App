@@ -1,0 +1,14 @@
+.site-layout .site-layout-background {
+    background: #fff;
+  }
+    [data-theme="dark"] .site-layout .site-layout-background {
+      background: #141414;
+    }
+
+.ant-layout-content{
+  margin: 10px;
+}
+
+input{
+  margin:10px;
+}
