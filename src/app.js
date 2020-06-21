@@ -29,13 +29,10 @@ function App() {
       <Layout style={{ minHeight: '100vh' }}>
        <Sider>
          <Menu theme="dark">
-          <Menu.Item key="1" >
-              <Link to="/trainingPlan">Plany treningowe</Link>
-           </Menu.Item>
-           <Menu.Item key="2"> 
+           <Menu.Item key="1"> 
               <Link to="/toDoList">Rzeczy do zrobienia</Link>
            </Menu.Item>
-           <Menu.Item key="3" >
+           <Menu.Item key="2" >
               <Link to="/trainingPlanList">Plany treningowe</Link>
            </Menu.Item>
          </Menu>
@@ -44,9 +41,6 @@ function App() {
           <Switch>
             <Route path="/toDoList">
               <ToDoList />
-            </Route>
-            <Route path="/trainingPlan">
-              <TrainingPlan />
             </Route>
             <Route path="/trainingPlanList">
               <TrainingPlanList />
