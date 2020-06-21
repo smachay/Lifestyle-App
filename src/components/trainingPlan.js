@@ -13,73 +13,86 @@ class trainingPlan extends Component {
       reps: 0,
       list: [],
       editId: null,
-      editMode: false,
+      editMode: false
     };
   }
 
-  passTrainingPlan(){
-    this.props.callbackFromParent();
-  }
+passTrainingPlan = (list) =>{
+  const trainingPlan = list;
+  const trainingPlanName = this.state.planName;
 
-  myCallback = (updatedList) => {
-    //console.log(updatedList);
-    this.setState({ 
-     list: updatedList,
-     editId: null,
-     editMode: false,
+  this.props.callbackFromParent(trainingPlanName,trainingPlan);
+}
+
+myCallback = (updatedList) =>{
+  this.setState({ 
+    list: updatedList,
+    editId: null,
+    editMode: false,
+});
+}
+
+setEditMode = (id) =>{
+  this.setState({ 
+    editMode: true,
+    editId: id 
   });
+}
+
+deleteItem = (id) =>{
+  //copy current list of items
+  const list = [...this.state.list];
+
+  //filter out item being deleted
+  const updatedList = list.filter(item => item.id !== id)
+
+  this.setState({ 
+    list: updatedList 
+  });
+}
+
+
+handleChange = ({ target }) =>{
+  //update react state 
+  this.setState({ [target.name]: target.value });
+};
+
+addItem() {
+  //Create new item with uniqe id
+  const newItem = {
+    id: 1 + Math.floor(Math.random() * 101 + 0),
+    exercise: this.state.exercise,
+    sets: this.state.sets,
+    reps: this.state.reps
   }
+  //Copy of current list of items
+  const list = [...this.state.list]
 
-  setEditMode(id){
-    this.setState({ 
-      editMode: true,
-      editId: id 
-    });
-    
-  }
+  //add new item to list
+  list.push(newItem);
 
-  deleteItem(id) {
-    //copy current list of items
-    const list = [...this.state.list];
+  //update state with new list and reset newItem input 
+  this.setState({
+    list,
+    exercise: "",
+    sets: 0,
+    reps: 0,
 
-    //filter out item being deleted
-    const updatedList = list.filter(item => item.id !== id)
+  });
+}
 
-    this.setState({ list: updatedList });
-  }
-
-  
-  handleChange = ({ target }) => {
-    //update react state 
-    this.setState({ [target.name]: target.value });
-  };
-
-  addItem() {
-    //Create item with uniqe id
-    const newItem = {
-      id: 1 + Math.floor(Math.random() * 101 + 0),
-      exercise: this.state.exercise,
-      sets: this.state.sets,
-      reps: this.state.reps
-    }
-    //Copy of current list of items
-    const list = [...this.state.list]
-
-    //add new item to list
-    list.push(newItem);
-
-    //update state with new list and reset newItem input 
+//react self invoke function 
+componentWillMount(){
+  if(this.props.stateEdit === true){
+    const plan = this.props.list[0].trainingPlan;
+    const planName = this.props.list[0].trainingPlanName
     this.setState({
-      list,
-      exercise: "",
-      sets: 0,
-      reps: 0,
-
+      list: plan,
+      planName: planName,
     });
-    //console.log(newItem);
   }
-
-
+    
+}
   render() {
     return (
       
@@ -90,13 +103,14 @@ class trainingPlan extends Component {
           
           <input
             type="text"
-            name="planNAmee"
+            name="planName"
             placeholder="Nazwa planu..."
+            defaultValue={this.state.planName}
             value={this.state.planName}
             onChange={this.handleChange}
             
           />
-          <button onClick={() => {this.passTrainingPlan()}}>
+          <button onClick={() => {this.passTrainingPlan(this.state.list)}}>
           Zapisz plan
           </button>
           <br />
@@ -107,9 +121,8 @@ class trainingPlan extends Component {
             placeholder="Wpisz nazwę ćwiczenia..."
             value={this.state.exercise}
             onChange={this.handleChange}
-            
           />
-                Ilość serii:
+          Ilość serii:
           <input
             type="number"
             name="sets"
@@ -117,7 +130,7 @@ class trainingPlan extends Component {
             value={this.state.sets}
             onChange={this.handleChange}
           />
-                Ilość powtórzeń:
+          Ilość powtórzeń:
           <input
             type="number"
             name="reps"
@@ -127,7 +140,7 @@ class trainingPlan extends Component {
           />
           <button onClick={() => this.addItem()}>
             Dodaj
-              </button>
+          </button>
           <ol>
             {this.state.list.map(item => {
               return (

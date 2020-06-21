@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import { render } from '@testing-library/react';
 
-class trainingPlan extends Component {
+class editForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +12,9 @@ class trainingPlan extends Component {
         
     };
   }
-  
+setValues(){
+
+}
 passEditedList(id){
   //copy current list of items
   const updatedList = [...this.props.list];
@@ -42,15 +44,7 @@ componentWillMount(){
 
   render() {
     return (
-      
-
-    
       <div className="editForm">
-        <div>
-        {
-          this.setValues()
-        }
-        </div>
         Edytuj swój plan
         <br/>
         <input
@@ -89,5 +83,4 @@ componentWillMount(){
 }
 
 
-
-export default trainingPlan;
+export default editForm;
