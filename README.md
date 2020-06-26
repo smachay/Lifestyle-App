@@ -1,5 +1,5 @@
 ## Project Overview 🎉
-Project created for sport enthusiasts. The application allows users to create, edit and save training plans, as well as plan their day by adding tasks to a "to-do list".
+Project created for sports enthusiasts. The application allows users to create, edit and save training plans, as well as plan their day by adding tasks to a "to-do list".
 
 ## Tech/framework used 🔧
 
