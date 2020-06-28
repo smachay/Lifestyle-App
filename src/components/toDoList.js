@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Checkbox } from 'antd';
+import {List,Button } from 'antd';
+import {DeleteTwoTone,PlusOutlined} from '@ant-design/icons';
 //import { render } from '@testing-library/react';
 
 class toDoList extends Component{
@@ -7,18 +10,42 @@ class toDoList extends Component{
     
         this.state={
           newItem:"",
-          list:[]
+          list:[],
+          listAchived:[]
         }    
       }
-      deleteItem(id){
-        //copy current list of items
-        const list = [...this.state.list];
+      deleteItem(id,listType){
+        if(listType === false){
+          //copy current list of items
+          const list = [...this.state.list];
+          
+          //filter out item being deleted
+          const updatedList = list.filter(item => item.id !== id);
 
-        //filter out item being deleted
-        const updatedList = list.filter(item => item.id !== id)
+          this.setState({ list: updatedList });
+        }else{
+          //copy current list of items
+          const list = [...this.state.listAchived];
+          
+          //filter out item being deleted
+          const updatedList = list.filter(item => item.id !== id);
 
-        this.setState({ list: updatedList });
+          this.setState({ listAchived: updatedList });
+        }
+        
       }
+
+      addListAchived = (id) =>{
+        const itemId = id;
+        const achived = this.state.list.find(item => item.id === id)
+        const listAchived = [...this.state.listAchived];
+        listAchived.push(achived);
+        this.deleteItem(itemId, false);
+        this.setState({
+          listAchived,
+        });
+          
+      };
 
       handleChange = ({ target }) => {
         //update react state 
@@ -45,36 +72,55 @@ class toDoList extends Component{
       }
       render(){
       return (
-        <div className="toDoList">
+      <div className="toDoList">
+        <div className="addTask">
+          <List
+            locale={{ emptyText: 'Zaplanuj swój dzień...' }}
+            header={
             <div>
-                Dodaj rzeczy do zrobienia
+              Dodaj rzeczy do zrobienia
+              <br/>
+              <input
+                type="text"
+                name="newItem"
+                placeholder="Wpisz przedmiot..."
+                value={this.state.newItem}
+                onChange={this.handleChange}
+              />
+              <Button className="addBtn" type="primary" shape="circle" icon={<PlusOutlined />} onClick={()=> this.addItem()}/>
             </div>
-            <input
-            type="text"
-            name="newItem"
-            placeholder="Wpisz przedmiot..."
-            value={this.state.newItem}
-            onChange={this.handleChange}
-            />
-
-            <button onClick={()=> this.addItem()}>
-                Dodaj
-            </button>
-            <br/>
-            <ul>
-            {this.state.list.map(item => {
-              return (
-                <li key={item.id}>
-                  {item.value}
-                  <button onClick={() => this.deleteItem(item.id)}>
-                    x
-                  </button>
-                </li>
-              );
-            })}
-            </ul>
-
+            }
+            bordered
+            dataSource={this.state.list}
+            renderItem={item => (
+              <List.Item>
+                <Checkbox key={item.id} options={item} onChange={() => this.addListAchived(item.id)}>
+                {item.value}
+                </Checkbox>
+                <DeleteTwoTone onClick={() => this.deleteItem(item.id,false)}/>
+              </List.Item>
+            )}
+          />
         </div>
+        <div className="listAchived">
+          <List
+              locale={{ emptyText: 'Zacznij działać, lista sama się nie zapełni!' }}
+              header={
+              <div>
+                Zrobione rzeczy
+              </div>
+              }
+              bordered
+              dataSource={this.state.listAchived}
+              renderItem={item => (
+                <List.Item>
+                  <div>{item.value}</div>
+                  <DeleteTwoTone onClick={() => this.deleteItem(item.id,true)}/>
+                </List.Item>
+              )}
+            />
+        </div>
+      </div>
       );
     }
     
