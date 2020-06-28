@@ -45,6 +45,7 @@ componentWillMount(){
   render() {
     return (
       <div className="editForm">
+        
         Edytuj swój plan
         <br/>
         <input

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ToDoList from './components/toDoList';
-import TrainingPlan from './components/trainingPlan';
 import TrainingPlanList from './components/trainingPlanList';
 import 'antd/dist/antd.css';
 import './index.css';
