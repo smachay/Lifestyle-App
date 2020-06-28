@@ -9,11 +9,24 @@
   margin: 10px;
 }
 
-input{
-  margin:10px;
+.ant-list{
+  background-color: white;
+  
 }
 
-button{
-  margin: 1px;
- 
+.toDoList{
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
 }
+
+.toDoList > *{
+  margin: 1%;
+  min-width: 23%;
+}
+
+.addBtn{
+  margin-left: 10px;
+}
+
+
