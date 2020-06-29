@@ -72,8 +72,8 @@ class toDoList extends Component{
       }
       render(){
       return (
-      <div className="toDoList">
-        <div className="addTask">
+      <div className="to-do-list">
+        <div className="add-task">
           <List
             locale={{ emptyText: 'Zaplanuj swój dzień...' }}
             header={
@@ -87,7 +87,7 @@ class toDoList extends Component{
                 value={this.state.newItem}
                 onChange={this.handleChange}
               />
-              <Button className="addBtn" type="primary" shape="circle" icon={<PlusOutlined />} onClick={()=> this.addItem()}/>
+              <Button className="add-btn" type="primary" shape="circle" icon={<PlusOutlined />} onClick={()=> this.addItem()}/>
             </div>
             }
             bordered
@@ -102,7 +102,7 @@ class toDoList extends Component{
             )}
           />
         </div>
-        <div className="listAchived">
+        <div className="list-achived">
           <List
               locale={{ emptyText: 'Zacznij działać, lista sama się nie zapełni!' }}
               header={

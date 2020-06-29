@@ -90,7 +90,7 @@ myCallback = (trainingPlanName,trainingPlan) =>{
         );
     }else {
         return(
-        <div className="trainingPlanList">
+        <div className="training-plan-list">
             <button onClick={() => {this.setAddingMode()}}>
              Stwórz nowy plan treningowy
             </button>

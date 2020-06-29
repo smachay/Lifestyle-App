@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EditForm from './editForm';
-//import TrainingPlanList from './trainingPlanList';
+
 //import { render } from '@testing-library/react';
 
 class trainingPlan extends Component {
@@ -95,12 +95,10 @@ componentWillMount(){
 }
   render() {
     return (
-      
-        <React.Fragment>
+<React.Fragment>
         {
           this.state.editMode === false ? 
-          <div className="trainingPlan">
-          
+          <div className="training-plan">
           <input
             type="text"
             name="planName"
@@ -168,7 +166,6 @@ componentWillMount(){
         }
         
       </React.Fragment>
-      
     );
   }
 }
@@ -178,3 +175,6 @@ componentWillMount(){
 export default trainingPlan;
 
 
+          
+        
+        

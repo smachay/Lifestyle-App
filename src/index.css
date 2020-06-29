@@ -23,18 +23,18 @@ button{
   
 }
 
-.toDoList{
+.to-do-list{
   display: flex;
   flex-wrap: wrap;
   width:100%;
 }
 
-.toDoList > *{
+.to-do-list > *{
   margin: 1%;
   min-width: 23%;
 }
 
-.addBtn{
+.add-btn{
   margin-left: 10px;
 }
 
