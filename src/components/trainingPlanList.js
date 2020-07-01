@@ -90,30 +90,32 @@ myCallback = (trainingPlanName,trainingPlan) =>{
         );
     }else {
         return(
-        <div className="training-plan-list">
-            <button onClick={() => {this.setAddingMode()}}>
-             Stwórz nowy plan treningowy
-            </button>
-            <br/>
-            <h3>Lista planów treningowych</h3>
-            <br/>
-            { 
-                this.state.list.map(plan => {
-                    return (
-                        <div>
-                            <ol type="" key={plan.id}>
-                                <h2>{plan.trainingPlanName}</h2>
-                                <button onClick={() => this.deleteItem(plan.id)}>
-                                Usuń
-                                </button>
-                                <button onClick={() => this.setEditMode(plan.id)}>
-                                Edytuj
-                                </button>
-                            </ol> 
-                        </div>
-                    );
-                })
-            }        
+        <div className="container">
+            <div className="training-plan-list">
+                <button onClick={() => {this.setAddingMode()}}>
+                    Stwórz nowy plan treningowy
+                </button>
+                <br/>
+                <h3>Lista planów treningowych</h3>
+                <br/>
+                { 
+                    this.state.list.map(plan => {
+                        return (
+                            <div>
+                                <ol type="" key={plan.id}>
+                                    <h2>{plan.trainingPlanName}</h2>
+                                    <button onClick={() => this.deleteItem(plan.id)}>
+                                    Usuń
+                                    </button>
+                                    <button onClick={() => this.setEditMode(plan.id)}>
+                                    Edytuj
+                                    </button>
+                                </ol> 
+                            </div>
+                        );
+                    })
+                }
+            </div>        
         </div>
         );
     }
