@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import TrainingPlan from './trainingPlan';
-//import { render } from '@testing-library/react';
 
 class trainingPlanList extends Component {
   constructor(props) {
@@ -78,6 +77,7 @@ myCallback = (trainingPlanName,trainingPlan) =>{
         return (
             <TrainingPlan
             callbackFromParent={this.myCallback}>
+            deleteItem={this.deleteItem}
             </TrainingPlan>
         );
     }else if(this.state.editMode === true){
@@ -85,7 +85,8 @@ myCallback = (trainingPlanName,trainingPlan) =>{
             <TrainingPlan
             callbackFromParent={this.myCallback}
             list={this.state.planForEdit}
-            stateEdit={this.state.editMode}>
+            stateEdit={this.state.editMode}
+            deleteItem={this.deleteItem}>
             </TrainingPlan>
         );
     }else {

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ToDoList from './components/toDoList';
-import TrainingPlanList from './components/trainingPlanList';
+import ToDoList from '../components/ToDoList/toDoList';
+import TrainingPlanList from '../components/TrainingPlanList/trainingPlanList';
 import 'antd/dist/antd.css';
-import './index.css';
+import '../index.css';
 import { Layout, Menu } from 'antd';
 
 

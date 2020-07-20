@@ -54,7 +54,7 @@ componentWillMount(){
       <Row style={{margin:'1%'}}>
       <Col 
       span={8} 
-      style={{ background:'white',border:'1px solid lightgrey',paddingTop:"2%",}}    
+      className='edit-form'    
       >
           
           <Form

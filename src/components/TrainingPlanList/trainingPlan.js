@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EditForm from './editForm';
-import {Space, Button, Input , Col, Row, Table} from 'antd';
-//import { render } from '@testing-library/react';
+import ExerciseTable from './exerciseTable';  
+import {Button, Input , Col, Row} from 'antd';
 
 class trainingPlan extends Component {
   constructor(props) {
@@ -25,11 +25,13 @@ passTrainingPlan = (list) =>{
 }
 
 myCallback = (updatedList) =>{
-  this.setState({ 
-    list: updatedList,
-    editId: null,
-    editMode: false,
-});
+  if(updatedList){
+    this.setState({ 
+      list: updatedList,
+      editId: null,
+      editMode: false,
+    });
+  }
 }
 
 setEditMode = (id) =>{
@@ -38,19 +40,6 @@ setEditMode = (id) =>{
     editId: id 
   });
 }
-
-deleteItem = (id) =>{
-  //copy current list of items
-  const list = [...this.state.list];
-
-  //filter out item being deleted
-  const updatedList = list.filter(item => item.id !== id)
-
-  this.setState({ 
-    list: updatedList 
-  });
-}
-
 
 handleChange = ({ target }) =>{
   //update react state 
@@ -93,37 +82,7 @@ componentWillMount(){
   }
     
 }
-  render() {
-    const columns = [
-      {
-        title: 'Ćwiczenie',
-        dataIndex: 'exercise',
-        key: 'exercise',
-      },
-      {
-        title: 'Ilość serii',
-        dataIndex: 'sets',
-        key: 'sets',
-      },
-      {
-        title: 'Ilość powtórzeń',
-        dataIndex: 'reps',
-        key: 'reps',
-        
-      },
-      {
-        title: '',
-        key: 'action',
-        render: (item) => (
-        <Space size="middle">
-          <a onClick={() => this.setEditMode(item.id)}>Edytuj</a>
-          |
-          <a onClick={() => this.deleteItem(item.id)}>Usuń</a>
-        </Space>
-        )
-      }]
-
-      
+  render() { 
     return (
       
         <React.Fragment>
@@ -131,7 +90,7 @@ componentWillMount(){
           this.state.editMode === false ? 
             <div className="container">
               <div className="training-plan" >
-                  <Row align="middle"> 
+                  <Row > 
                     <Col span={12} className="plan-element" >
                       <Input
                         type="text"
@@ -180,22 +139,22 @@ componentWillMount(){
                   </Row>
               </div>
               <div className="training-table" >
-                <Table 
-                  locale={{ emptyText: 'Nie dodano jeszcze żadnego ćwiczenia...' }}
-                  columns={columns}
-                  pagination={false}
-                  dataSource={this.state.list}
+                <ExerciseTable
+                  list={this.state.list}
+                  delete={this.props.deleteItem}
+                  edit={this.setEditMode}
                 />
               </div>    
           </div>            
           :
-          <EditForm 
-            id={this.state.editId}
-            list={this.state.list}
-            callbackFromParent={this.myCallback}>
-          </EditForm>
+          
+            <EditForm 
+              id={this.state.editId}
+              list={this.state.list}
+              callbackFromParent={this.myCallback}>
+            </EditForm>
+          
         }
-        
       </React.Fragment>
       
     );

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Checkbox } from 'antd';
 import {List,Button } from 'antd';
 import {DeleteTwoTone,PlusOutlined} from '@ant-design/icons';
-//import { render } from '@testing-library/react';
 
 class toDoList extends Component{
     constructor(props){
